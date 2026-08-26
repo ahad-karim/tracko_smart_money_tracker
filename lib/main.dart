@@ -21,7 +21,24 @@ class MoneyTrackerApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home:const Text("Hello"),
+      debugShowCheckedModeBanner: false,
+      home: const HomeScreen(),
     );
   }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tracko Money Tracker'),
+      ),
+      body: const Center(child: Text('Welcome to your Money Tracker')),
+    );
+  }
+
+
 }
