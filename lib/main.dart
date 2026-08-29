@@ -11,7 +11,7 @@ void main() {
 }
 
 class MoneyTrackerApp extends StatelessWidget {
-  const MoneyTrackerApp({Key? key}) : super(key: key);
+  const MoneyTrackerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MoneyTrackerApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
