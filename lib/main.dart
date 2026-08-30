@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(
@@ -25,20 +26,4 @@ class MoneyTrackerApp extends StatelessWidget {
       home: const HomeScreen(),
     );
   }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tracko Money Tracker'),
-      ),
-      body: const Center(child: Text('Welcome to your Money Tracker')),
-    );
-  }
-
-
 }
