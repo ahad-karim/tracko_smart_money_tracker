@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../database/database.dart';
 import '../providers/database_provider.dart';
+import 'add_transaction_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Grab the database instance from the provider
+
     final db = ref.watch(databaseProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
       ),
-      // StreamBuilder listens to the Drift stream
+
       body: StreamBuilder<List<Transaction>>(
         stream: db.watchAllTransactions(),
         builder: (context, snapshot) {
@@ -37,7 +38,6 @@ class HomeScreen extends ConsumerWidget {
             itemCount: transactions.length,
             itemBuilder: (context, index) {
               final transaction = transactions[index];
-              // Display each transaction as a list item
               return ListTile(
                 leading: CircleAvatar(
                   backgroundColor: transaction.type == 'income' ? Colors.green : Colors.red,
@@ -53,7 +53,6 @@ class HomeScreen extends ConsumerWidget {
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 onLongPress: () {
-                  // Delete on long press
                   db.deleteTransaction(transaction.id);
                 },
               );
@@ -63,7 +62,12 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: Navigate to Add Transaction Screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddTransactionScreen(),
+            ),
+          );
         },
         child: const Icon(Icons.add),
       ),
