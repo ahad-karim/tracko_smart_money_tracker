@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:drift/drift.dart' hide Column;
+import '../database/database.dart';
+import '../providers/database_provider.dart';
 
 class AddTransactionScreen extends ConsumerStatefulWidget {
   const AddTransactionScreen({super.key});
@@ -41,7 +44,21 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
 
   Future<void> _saveTransaction() async {
     if (_formKey.currentState!.validate()) {
-      // TODO: Save to database (Day 7)
+      final db = ref.read(databaseProvider);
+      final parsedAmount = double.parse(_amountController.text);
+
+      final newTransaction = TransactionsCompanion(
+        amount: Value(parsedAmount),
+        type: Value(_selectedType),
+        category: Value(_selectedCategory),
+        date: Value(_selectedDate),
+      );
+
+      await db.insertTransaction(newTransaction);
+
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
 
